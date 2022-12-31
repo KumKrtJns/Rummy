@@ -21,9 +21,7 @@ class Deck:
         for i in range(packs):
             for s in SUIT:
                 for r in RANK:
-                    if r != 'JOK' and s != 'Joker':
-                        self.cards.append(Card(r, s))
-                    if r == 'JOK' and s == 'Joker':
+                    if (r != 'JOK' and s != 'Joker') or (r == 'JOK' and s == 'Joker'):
                         self.cards.append(Card(r, s))
 
     def shuffle(self):
@@ -66,4 +64,4 @@ class Deck:
 
 
 if __name__ == "__main__":
-    deck = Deck(1)
+    deck = Deck(2)
