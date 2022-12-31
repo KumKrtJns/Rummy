@@ -1,8 +1,9 @@
 from Functions import print_cards
 from Functions import get_object
 from Functions import sort_sequence
-
-
+from Functions import is_valid_run
+from Functions import is_valid_book
+from Functions import is_valid_run_joker
 
 
 class Player:
@@ -69,7 +70,7 @@ class Player:
         set_array = [self.stash[:3], self.stash[3:6], self.stash[6:9], self.stash[9:]]
 
         # Need to count the number of sets that are runs without a joker.
-        # 	There must be at least one run with out a joker
+        # There must be at least one run without a joker
         count = 0
         for s in set_array:
             if is_valid_run(s):
@@ -101,22 +102,24 @@ class Player:
 
             # Get Player Action
             action = input(
-                "*** " + self.name + ", What would you like to do? ***, \n(M)ove Cards, (P)ick from pile, (T)ake from deck, (D)rop, (S)ort, (C)lose Game, (R)ules: ")
+                "*** " + self.name + ", What would you like to do? ***, \n(M)ove Cards, (P)ick from pile, (T)ake from "
+                                     "deck, (D)rop, (S)ort, (C)lose Game, (R)ules: ")
 
             # Move or Rearrange Cards in the stash
             if action == 'M' or action == 'm':
                 lp = 1
                 while int(lp):
-                    # Get the Card that needs to moved.
+                    # Get the Card that needs to move.
                     move_what = input("Enter which card you want to move i.e. 4H (4 of Hearts): ")
                     move_what.strip()
                     if get_object(self.stash, move_what.upper()) not in self.stash:
                         input("ERROR: That card is not in your stash.  Enter to continue")
                         continue
 
-                    # Get the Card where the move_what needs to moved.
+                    # Get the Card where the move_what needs to move.
                     move_where = input(
-                        "Enter where you want move card to (which card the moving card will go before) Enter Space to move to end \nEnter Rank followed by first letter of Suit. i.e. 4H (4 of Hearts):")
+                        "Enter where you want move card to (which card the moving card will go before) Enter Space to "
+                        "move to end \nEnter Rank followed by first letter of Suit. i.e. 4H (4 of Hearts):")
                     move_where.strip()
                     if move_where != "" and get_object(self.stash, move_where.upper()) not in self.stash:
                         input("ERROR: This is an invalid location.  Enter to continue")
@@ -133,7 +136,7 @@ class Player:
                         self.stash.insert(location, move_what)
                     else:
                         # If the move_where was not specified by the User then,
-                        #the card to the end of the stash
+                        # the card to the end of the stash
                         self.stash.remove(move_what)
                         self.stash.append(move_what)
                     print(print_cards(self.stash))
@@ -161,7 +164,8 @@ class Player:
             if action == 'D' or action == 'd':
                 if len(self.stash) == 14:
                     drop = input(
-                        "Which card would you like to drop? \nEnter Rank followed by first letter of Suit. i.e. 4H (4 of Hearts): ")
+                        "Which card would you like to drop? \nEnter Rank followed by first letter of Suit. i.e. 4H (4 "
+                        "of Hearts): ")
                     drop = drop.strip()
                     drop = drop.upper()
                     if self.drop_card(drop):
@@ -181,7 +185,8 @@ class Player:
 
                 if len(self.stash) == 14:
                     drop = input(
-                        "Which card would you like to drop? \nEnter Rank followed by first letter of Suit. i.e. 4H (4 of Hearts): ")
+                        "Which card would you like to drop? \nEnter Rank followed by first letter of Suit. i.e. 4H (4 "
+                        "of Hearts): ")
                     drop = drop.strip()
                     drop = drop.upper()
                     if self.drop_card(drop):
@@ -192,7 +197,7 @@ class Player:
                         else:
                             input("ERROR: The game is not over. Enter to Continue playing.")
                             # if this Close was false alarm then discarded Card will
-                            #		have to be put back into the stash for the Player to continue.
+                            # have to be put back into the stash for the Player to continue.
                             self.stash.append(self.game.draw_pile())
                     else:
                         input("ERROR: Not a valid card, Enter to continue")
@@ -214,8 +219,10 @@ class Player:
                       "\n- Jokers are randomly picked from the deck at the start of the game.",
                       "\n- Joker is denoted by '-J' and can be used to complete sets.",
                       "\n- During each turn, the player may take a card from the pile or from the deck.",
-                      "Immediately after, the player must drop any one card into the pile so as not go over the 13 card limit.",
-                      "\n- When a player has created all the sets, select Close Game option and drop the excess card into the pile.",
+                      "Immediately after, the player must drop any one card into the pile so as not go over the 13 "
+                      "card limit.",
+                      "\n- When a player has created all the sets, select Close Game option and drop the excess card "
+                      "into the pile.",
                       "\n- Card with Rank 10 is represented as Rank T"
                       "\n--------------------------------------------")
                 input("Enter to continue ....")
