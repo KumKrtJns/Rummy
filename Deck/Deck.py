@@ -2,6 +2,7 @@ import random
 from constants.constants import SUIT, RANK
 from Card import Card
 
+
 class Deck:
     """ Deck Class - Models the card Deck """
 
@@ -20,7 +21,10 @@ class Deck:
         for i in range(packs):
             for s in SUIT:
                 for r in RANK:
-                    self.cards.append(Card(r, s))
+                    if r != 'JOK' and s != 'Joker':
+                        self.cards.append(Card(r, s))
+                    if r == 'JOK' and s == 'Joker':
+                        self.cards.append(Card(r, s))
 
     def shuffle(self):
         """ Shuffle the Deck, so that cards are ordered in a random order
@@ -59,3 +63,7 @@ class Deck:
         for card in self.cards:
             if self.joker.rank == card.rank:
                 card.isjoker = True
+
+
+if __name__ == "__main__":
+    deck = Deck(1)
