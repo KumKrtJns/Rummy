@@ -64,4 +64,5 @@ class Deck:
 
 
 if __name__ == "__main__":
-    deck = Deck(2)
+    deck = Deck(1)
+    print(deck.set_joker())

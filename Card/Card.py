@@ -37,3 +37,7 @@ class Card:
 			True or False
 		"""
         return self.isjoker
+
+
+if __name__ == "__main__":
+    card = Card('JOK', 'Joker')
