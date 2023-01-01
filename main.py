@@ -28,7 +28,7 @@ def main():
     """ Main Program """
 
     # Create Deck with 3 Packs
-    deck = Deck(3)
+    deck = Deck(1)
     deck.shuffle()
 
     # Joker Logic is disabled currently.

@@ -11,7 +11,7 @@ def sort_sequence(sequence):
 
     while is_sort_complete == False:
         is_sort_complete = True
-        for i in range(0, len(sequence) - 1):
+        for i in range(len(sequence)-1):
             if RANK_VALUE[sequence[i].rank] > RANK_VALUE[sequence[i + 1].rank]:
                 a = sequence[i + 1]
                 sequence[i + 1] = sequence[i]

@@ -1,5 +1,6 @@
 from Player import Player
 
+
 class Game:
     """ Game Class - Models a single Game """
 
@@ -60,13 +61,17 @@ class Game:
 		"""
         i = 0
         while self.players[i].play() == False:
+            # clear screen to remove the output of previous Player action
             print(chr(27) + "[2J")
             i += 1
             if i == len(self.players):
                 i = 0
             print("***", self.players[i].name, "to play now.")
-            input(self.players[i].name + " hit enter to continue...")
 
         # Game Over
         print("*** GAME OVER ***")
         print("*** ", self.players[i].name, " Won the game ***")
+
+
+if __name__ == "__main__":
+    pass

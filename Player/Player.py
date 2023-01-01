@@ -23,6 +23,9 @@ class Player:
         self.deck = deck
         self.game = game
 
+    def __str__(self):
+        pass
+
     def deal_card(self, card):
         """ Deal a Card to the Player
 		Args:
