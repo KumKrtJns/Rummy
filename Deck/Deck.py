@@ -59,10 +59,11 @@ class Deck:
         self.cards.remove(self.joker)
 
         for card in self.cards:
-            if self.joker.rank == card.rank:
+            if (self.joker.rank == card.rank) or (self.joker.rank == 'JOK' and card.rank == 'A'):
                 card.isjoker = True
 
 
 if __name__ == "__main__":
     deck = Deck(1)
-    print(deck.set_joker())
+    deck.set_joker()
+    print(deck.joker)
