@@ -29,6 +29,9 @@ class Card:
             return self.rank + SUIT_SYMBOLS[self.suit] + '-J'
         return self.rank + SUIT_SYMBOLS[self.suit]
 
+    def __repr__(self):
+        return "{}{}".format(self.rank, SUIT_SYMBOLS[self.suit])
+
     def is_joker(self):
         """Status check to see if this Card is a Joker
 		Args:
@@ -40,4 +43,4 @@ class Card:
 
 
 if __name__ == "__main__":
-    card = Card('JOK', 'Joker')
+    card = Card('X', 'Joker')

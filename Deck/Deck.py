@@ -21,7 +21,7 @@ class Deck:
         for i in range(packs):
             for s in SUIT:
                 for r in RANK:
-                    if (r != 'JOK' and s != 'Joker') or (r == 'JOK' and s == 'Joker'):
+                    if (r != 'X' and s != 'Joker') or (r == 'X' and s == 'Joker'):
                         self.cards.append(Card(r, s))
 
     def shuffle(self):
@@ -59,7 +59,7 @@ class Deck:
         self.cards.remove(self.joker)
 
         for card in self.cards:
-            if (self.joker.rank == card.rank) or (self.joker.rank == 'JOK' and card.rank == 'A'):
+            if (self.joker.rank == card.rank) or (self.joker.rank == 'X' and card.rank == 'A'):
                 card.isjoker = True
 
 

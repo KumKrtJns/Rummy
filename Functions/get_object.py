@@ -8,7 +8,7 @@ def get_object(arr, str_card):
 		object pointer corresponding to string, from the arr
 	"""
     # Make sure the str_card has only a RANK letter and SUIT letter
-    #		for example KH for King of Hearts.
+    # for example KH for King of Hearts.
     if len(str_card) != 2:
         return None
 

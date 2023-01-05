@@ -1,3 +1,8 @@
+from constants import RANK_VALUE
+from Functions import sort_sequence
+from Functions import push_joker_toend
+
+
 def is_valid_run_joker(sequence):
     """ Check if the sequence with Jokers is a valid run.
 		Args:
@@ -9,18 +14,18 @@ def is_valid_run_joker(sequence):
     RANK_VALUE["A"] = 1  # resetting value of A (may have been set to 14 in previous run)
 
     # Order the Cards in the sequence
-    sort_sequence(sequence)
+    sequence = sort_sequence(sequence)
 
     # Push all Jokers to the end and count the number of Jokers
     push_joker_toend(sequence)
     joker_count = 0
     for card in sequence:
-        if card.is_joker() == True:
+        if card.is_joker():
             joker_count += 1
 
     # Make sure the Suit Match except for Jokers.
     for card in sequence:
-        if card.is_joker() == True:
+        if card.is_joker():
             continue
         if card.suit != sequence[0].suit:
             return False
@@ -29,15 +34,15 @@ def is_valid_run_joker(sequence):
     if sequence[0].rank == "A":
         if sequence[1].rank == "Q" or sequence[1].rank == "J" or sequence[1].rank == "K":
             RANK_VALUE[sequence[0].rank] = 14
-            sort_sequence(sequence)
+            sequence = sort_sequence(sequence)
             push_joker_toend(sequence)
 
     rank_inc = 1
     for i in range(1, len(sequence)):
-        if sequence[i].is_joker() == True:
+        if sequence[i].is_joker():
             continue
-        # Compare RANK values with accomodating for Jokers.
-        while (RANK_VALUE[sequence[i].rank] != RANK_VALUE[(sequence[i - 1].rank)] + rank_inc):
+        # Compare RANK values with accommodating for Jokers.
+        while RANK_VALUE[sequence[i].rank] != RANK_VALUE[sequence[i - 1].rank] + rank_inc:
             # Use Joker Count for missing Cards in the run
             if joker_count > 0:
                 rank_inc += 1
@@ -45,7 +50,7 @@ def is_valid_run_joker(sequence):
                 continue
             else:
                 # if No more Jokers left, then revert to regular comparison
-                if RANK_VALUE[sequence[i].rank] != RANK_VALUE[(sequence[i - 1].rank)] + 1:
+                if RANK_VALUE[sequence[i].rank] != RANK_VALUE[sequence[i - 1].rank] + 1:
                     return False
                 else:
                     break

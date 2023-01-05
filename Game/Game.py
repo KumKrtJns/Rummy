@@ -60,7 +60,7 @@ class Game:
 				No returns
 		"""
         i = 0
-        while self.players[i].play() == False:
+        while not self.players[i].play():
             # clear screen to remove the output of previous Player action
             print(chr(27) + "[2J")
             i += 1
